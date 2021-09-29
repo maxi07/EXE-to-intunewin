@@ -6,7 +6,11 @@ This Windows batch file pulls the latest version of the [Microsoft content prep 
 - [x] Easy drag and drop of setup files for creating setup
 - [x] Creates a **.intunewin** file, ready for upload to Microsoft Endpoint Manager
 - [x] Takes .MSI or .EXE as input
+- [x] Auto-Update
 - [ ] Error handling
+
+## Demo with OBS
+https://user-images.githubusercontent.com/7480270/135243161-3137f33d-0902-410b-9bdb-ce7db3f85614.mp4
 
 ## Disclaimer
 Before you install and the use Microsoft Win32 Content Prep Tool you must:

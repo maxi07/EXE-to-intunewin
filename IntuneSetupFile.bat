@@ -1,5 +1,5 @@
 @echo off
-SET currentvers=1.2
+SET currentvers=1.3
 cls
 echo ==============================================
 echo      CREATE .INTUNEWIN FROM .EXE OR .MSI
@@ -80,19 +80,24 @@ if errorlevel 1 (
 	SET vers=%%F
 ))
 if %vers% gtr %currentvers% ( 
-	ECHO.
-	ECHO ===================================================
-	ECHO Hey, there is an update available!
-	ECHO Head over to https://github.com/maxi07/EXE-to-intunewin to download the latest version %vers%
-	set /P up=Do you wish to update the script [Y/N]? 
-	if /I "%up%" EQU "Y" goto :update
-	if /I "%up%" EQU "N" goto :downloadcontentprep
+	goto askupdate
+) else (
+	goto downloadcontentprep
 )
+
+:askupdate
+ECHO.
+ECHO ===================================================
+ECHO Hey, there is an update available!
+choice /M "Do you wish to update automatically?"
+if %ERRORLEVEL% EQU 2 goto downloadcontentprep
+if %ERRORLEVEL% EQU 1 goto update
+if %ERRORLEVEL% EQU 0 goto downloadcontentprep
 
 :update
 echo Downloading latest update...
-curl -L https://github.com/maxi07/EXE-to-intunewin/raw/main/IntuneSetupFile.bat >> IntuneSetupFile-Latest.bat
-curl -L https://github.com/maxi07/EXE-to-intunewin/raw/main/UpdateHelper.bat >> UpdateHelper.bat
+curl -L -s https://github.com/maxi07/EXE-to-intunewin/raw/main/IntuneSetupFile.bat >> IntuneSetupFile-Latest.bat
+curl -L -s https://github.com/maxi07/EXE-to-intunewin/raw/main/UpdateHelper.bat >> UpdateHelper.bat
 pause
 echo Downloaded the latest file into current directory.
 echo Please wait...
